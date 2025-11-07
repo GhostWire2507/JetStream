@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.jetstream.controllers.MainController"
+      alignment="TOP_CENTER"
+      spacing="20"
+      stylesheets="@/css/style.css"
+      padding="20">
+
+    <!-- Dashboard Cards -->
+    <HBox spacing="20" alignment="CENTER">
+        <VBox fx:id="cardFlights" styleClass="card">
+            <Text text="Flights" styleClass="card-title"/>
+            <Text fx:id="txtTotalFlights" text="0" styleClass="card-value"/>
+        </VBox>
+        <VBox fx:id="cardBookings" styleClass="card">
+            <Text text="Bookings" styleClass="card-title"/>
+            <Text fx:id="txtTotalBookings" text="0" styleClass="card-value"/>
+        </VBox>
+        <VBox fx:id="cardCancellations" styleClass="card">
+            <Text text="Cancellations" styleClass="card-title"/>
+            <Text fx:id="txtTotalCancellations" text="0" styleClass="card-value"/>
+        </VBox>
+        <VBox fx:id="cardPassengers" styleClass="card">
+            <Text text="Passengers" styleClass="card-title"/>
+            <Text fx:id="txtTotalPassengers" text="0" styleClass="card-value"/>
+        </VBox>
+    </HBox>
+
+    <!-- Navigation Buttons -->
+    <VBox spacing="12" alignment="CENTER">
+        <Button fx:id="btnReservation" text="Reservation" onAction="#onReservation"/>
+        <Button fx:id="btnFlight" text="Flight Management" onAction="#onFlight"/>
+        <Button fx:id="btnCancellation" text="Cancellation" onAction="#onCancellation"/>
+        <Button fx:id="btnAdmin" text="Admin Dashboard" onAction="#onAdmin"/>
+    </VBox>
+
+</VBox>

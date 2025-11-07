@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.jetstream.controllers.FlightController" spacing="10" alignment="CENTER">
+    <children>
+        <Label text="Flight Management" styleClass="title"/>
+        <TextField fx:id="txtFlightNumber" promptText="Flight Number"/>
+        <TextField fx:id="txtOrigin" promptText="Origin"/>
+        <TextField fx:id="txtDestination" promptText="Destination"/>
+        <TextField fx:id="txtCapacity" promptText="Capacity"/>
+        <Button fx:id="btnAddFlight" text="Add Flight" onAction="#onAddFlight"/>
+        <Button fx:id="btnBack" text="Back" onAction="#onBack"/>
+    </children>
+</VBox>

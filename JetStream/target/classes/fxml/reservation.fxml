@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.jetstream.controllers.ReservationController" spacing="10" alignment="CENTER">
+    <children>
+        <Label text="Reservation" styleClass="title"/>
+        <TextField fx:id="txtPassengerName" promptText="Passenger Name"/>
+        <TextField fx:id="txtSeatNumber" promptText="Seat Number"/>
+        <Button fx:id="btnBook" text="Book" onAction="#onBook"/>
+        <Button fx:id="btnBack" text="Back" onAction="#onBack"/>
+    </children>
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+</VBox>
