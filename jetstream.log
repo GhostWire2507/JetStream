@@ -1,0 +1,96 @@
+Nov 05, 2025 8:08:07 AM com.jetstream.database.DatabaseConnection init
+SEVERE: DB init failed: No suitable driver found for jdbc:postgresql://dpg-d45e5v75r7bs73ag245g-a:5432/jetstreamdb
+Nov 05, 2025 8:10:01 AM com.jetstream.database.DatabaseConnection close
+INFO: DB connection closed.
+Nov 05, 2025 8:57:32 AM com.jetstream.database.DatabaseConnection init
+SEVERE: DB init failed: The connection attempt failed.
+Nov 05, 2025 8:57:41 AM com.jetstream.database.DatabaseConnection close
+INFO: DB connection closed.
+Nov 05, 2025 9:07:04 AM com.jetstream.database.DatabaseConnection init
+SEVERE: DB init failed: No suitable driver found for jdbc:mysql://localhost:3306/jetstream
+Nov 05, 2025 9:07:15 AM com.jetstream.database.DatabaseConnection close
+INFO: DB connections closed.
+Nov 05, 2025 9:42:41 AM com.jetstream.database.DatabaseConnection init
+INFO: Connected to MySQL.
+Nov 05, 2025 9:42:42 AM com.jetstream.database.DatabaseConnection init
+SEVERE: DB init failed: The connection attempt failed.
+Nov 05, 2025 9:42:47 AM com.jetstream.database.DatabaseConnection close
+INFO: DB connections closed.
+Nov 05, 2025 10:09:09 AM com.jetstream.database.DatabaseConnection init
+INFO: Connected to MySQL.
+Nov 05, 2025 10:09:10 AM com.jetstream.database.DatabaseConnection init
+SEVERE: DB init failed: The connection attempt failed.
+Nov 05, 2025 10:09:24 AM com.jetstream.database.DatabaseConnection close
+INFO: DB connections closed.
+Nov 07, 2025 10:05:43 AM com.jetstream.database.DatabaseConnection init
+INFO: ✓ Connected to MySQL.
+Nov 07, 2025 10:05:46 AM com.jetstream.database.DatabaseConnection init
+INFO: ✓ Connected to PostgreSQL.
+Nov 07, 2025 10:10:33 AM com.jetstream.database.DatabaseConnection close
+INFO: DB connections closed.
+Nov 07, 2025 10:11:07 AM com.jetstream.database.DatabaseConnection init
+INFO: ✓ Connected to MySQL.
+Nov 07, 2025 10:11:10 AM com.jetstream.database.DatabaseConnection init
+INFO: ✓ Connected to PostgreSQL.
+Nov 07, 2025 10:11:15 AM com.jetstream.database.DatabaseConnection close
+INFO: DB connections closed.
+Nov 07, 2025 10:14:03 AM com.jetstream.database.DatabaseConnection init
+INFO: ✓ Connected to MySQL.
+Nov 07, 2025 10:14:06 AM com.jetstream.database.DatabaseConnection init
+INFO: ✓ Connected to PostgreSQL.
+Nov 07, 2025 10:14:23 AM com.jetstream.database.DatabaseConnection close
+INFO: DB connections closed.
+Nov 07, 2025 10:20:26 AM com.jetstream.database.DatabaseConnection init
+INFO: ✓ Connected to MySQL.
+Nov 07, 2025 10:20:29 AM com.jetstream.database.DatabaseConnection init
+INFO: ✓ Connected to PostgreSQL.
+Nov 07, 2025 10:20:38 AM com.jetstream.database.DatabaseConnection close
+INFO: DB connections closed.
+Nov 07, 2025 10:26:10 AM com.jetstream.database.DatabaseConnection init
+INFO: ✓ Connected to MySQL.
+Nov 07, 2025 10:26:14 AM com.jetstream.database.DatabaseConnection init
+INFO: ✓ Connected to PostgreSQL.
+Nov 07, 2025 10:26:26 AM com.jetstream.database.DatabaseConnection close
+INFO: DB connections closed.
+Nov 07, 2025 10:26:44 AM com.jetstream.database.DatabaseConnection init
+INFO: ✓ Connected to MySQL.
+Nov 07, 2025 10:26:47 AM com.jetstream.database.DatabaseConnection init
+INFO: ✓ Connected to PostgreSQL.
+Nov 07, 2025 10:26:58 AM com.jetstream.database.DatabaseConnection close
+INFO: DB connections closed.
+Nov 07, 2025 10:32:04 AM com.jetstream.database.DatabaseConnection init
+INFO: ✓ Connected to MySQL.
+Nov 07, 2025 10:32:07 AM com.jetstream.database.DatabaseConnection init
+INFO: ✓ Connected to PostgreSQL.
+Nov 07, 2025 10:32:24 AM com.jetstream.database.DatabaseConnection close
+INFO: DB connections closed.
+Nov 07, 2025 10:36:34 AM com.jetstream.database.DatabaseConnection init
+INFO: ✓ Connected to MySQL.
+Nov 07, 2025 10:36:37 AM com.jetstream.database.DatabaseConnection init
+INFO: ✓ Connected to PostgreSQL.
+Nov 07, 2025 10:37:02 AM com.jetstream.database.DatabaseConnection close
+INFO: DB connections closed.
+Nov 07, 2025 10:48:49 AM com.jetstream.database.DatabaseConnection init
+INFO: ✓ Connected to MySQL.
+Nov 07, 2025 10:48:53 AM com.jetstream.database.DatabaseConnection init
+INFO: ✓ Connected to PostgreSQL.
+Nov 07, 2025 10:49:14 AM com.jetstream.database.DatabaseConnection close
+INFO: DB connections closed.
+Nov 07, 2025 10:54:50 AM com.jetstream.database.DatabaseConnection init
+INFO: ✓ Connected to MySQL.
+Nov 07, 2025 10:54:53 AM com.jetstream.database.DatabaseConnection init
+INFO: ✓ Connected to PostgreSQL.
+Nov 07, 2025 10:55:26 AM com.jetstream.database.DatabaseConnection close
+INFO: DB connections closed.
+Nov 07, 2025 7:08:58 PM com.jetstream.database.DatabaseConnection init
+INFO: ✓ Connected to MySQL.
+Nov 07, 2025 7:09:02 PM com.jetstream.database.DatabaseConnection init
+SEVERE: PostgreSQL connection is null
+Nov 07, 2025 7:09:06 PM com.jetstream.database.DatabaseConnection close
+INFO: DB connections closed.
+Nov 09, 2025 1:01:23 PM com.jetstream.database.DatabaseConnection init
+INFO: ✓ Connected to MySQL.
+Nov 09, 2025 1:01:27 PM com.jetstream.database.DatabaseConnection init
+SEVERE: PostgreSQL connection is null
+Nov 09, 2025 1:01:59 PM com.jetstream.database.DatabaseConnection close
+INFO: DB connections closed.

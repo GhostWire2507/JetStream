@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.jetstream.controllers.CancellationController"
+      alignment="TOP_CENTER"
+      spacing="20"
+      padding="20"
+      prefWidth="800"
+      prefHeight="600">
+
+    <!-- Dashboard Cards -->
+    <HBox spacing="20" alignment="CENTER">
+        <VBox styleClass="card">
+            <Text text="Total Cancellations" styleClass="card-title"/>
+            <Text fx:id="txtTotalCancellations" text="0" styleClass="card-value"/>
+        </VBox>
+        <VBox styleClass="card">
+            <Text text="Available Seats" styleClass="card-title"/>
+            <Text fx:id="txtAvailableSeats" text="0" styleClass="card-value"/>
+        </VBox>
+    </HBox>
+
+    <!-- Cancellation Form -->
+    <VBox spacing="10" alignment="CENTER">
+        <Text text="Cancel Booking" styleClass="title"/>
+        <TextField fx:id="txtBookingId" promptText="Booking ID"/>
+        <HBox spacing="10" alignment="CENTER">
+            <Button fx:id="btnCancel" text="Cancel Booking" onAction="#onCancel"/>
+            <Button fx:id="btnBack" text="Back" onAction="#onBack"/>
+        </HBox>
+    </VBox>
+
+    <!-- Table of Reservations -->
+    <TableView fx:id="tblReservations" prefHeight="300" prefWidth="600" styleClass="table-view">
+        <columns>
+            <TableColumn fx:id="colBookingId" text="Booking ID"/>
+            <TableColumn fx:id="colPassengerName" text="Passenger Name"/>
+            <TableColumn fx:id="colSeatNumber" text="Seat Number"/>
+            <TableColumn fx:id="colFlightNumber" text="Flight Number"/>
+        </columns>
+    </TableView>
+
+</VBox>

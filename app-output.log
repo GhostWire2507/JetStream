@@ -1,0 +1,101 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< com.jetstream:JetStream >-----------------------
+[INFO] Building JetStream 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> javafx-maven-plugin:0.0.8:run (default-cli) > process-classes @ JetStream >>>
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ JetStream ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 8 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.13.0:compile (default-compile) @ JetStream ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] <<< javafx-maven-plugin:0.0.8:run (default-cli) < process-classes @ JetStream <<<
+[INFO] 
+[INFO] 
+[INFO] --- javafx-maven-plugin:0.0.8:run (default-cli) @ JetStream ---
+[WARNING] Module name not found in <mainClass>. Module name will be assumed from module-info.java
+
+??????????????????????????????????????????????????????????????
+?          JetStream Airline - Starting Application         ?
+??????????????????????????????????????????????????????????????
+
+Step 1: Loading configuration...
+? Configuration loaded successfully from classpath
+? Configuration loaded
+
+Step 2: Initializing database connections...
+=== Initializing Database Connections ===
+MySQL connection attempt 1 of 3...
+Connecting to MySQL at: jdbc:mysql://localhost:3306/jetstream
+? MySQL connection established successfully!
+Nov 07, 2025 10:20:26 AM com.jetstream.database.DatabaseConnection init
+INFO: ? Connected to MySQL.
+? MySQL connection successful
+PostgreSQL connection attempt 1 of 3...
+Connecting to PostgreSQL at: jdbc:postgresql://dpg-d45e5v75r7bs73ag245g-a.oregon-postgres.render.com:5432/jetstreamdb
+? PostgreSQL connection established successfully!
+Nov 07, 2025 10:20:29 AM com.jetstream.database.DatabaseConnection init
+INFO: ? Connected to PostgreSQL.
+? PostgreSQL connection successful
+=== Database Initialization Complete ===
+
+? Database initialization complete
+
+Step 3: Setting up primary stage...
+? Stage initialized
+
+Step 4: Loading main scene...
+Loading FXML: /fxml/main.fxml
+? Error loading FXML: /fxml/main.fxml
+javafx.fxml.LoadException: 
+/C:/Users/dell/IdeaProjects/JetStream/target/classes/fxml/main.fxml:43
+
+	at javafx.fxml/javafx.fxml.FXMLLoader.constructLoadException(FXMLLoader.java:2714)
+	at javafx.fxml/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2692)
+	at javafx.fxml/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2555)
+	at javafx.fxml/javafx.fxml.FXMLLoader.load(FXMLLoader.java:2523)
+	at com.jetstream.jetstream@1.0-SNAPSHOT/com.jetstream.utils.SceneManager.loadScene(SceneManager.java:39)
+	at com.jetstream.jetstream@1.0-SNAPSHOT/com.jetstream.utils.SceneManager.loadMain(SceneManager.java:32)
+	at com.jetstream.jetstream@1.0-SNAPSHOT/com.jetstream.application.HelloApplication.start(HelloApplication.java:41)
+	at javafx.graphics/com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9(LauncherImpl.java:847)
+	at javafx.graphics/com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12(PlatformImpl.java:484)
+	at javafx.graphics/com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:457)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at javafx.graphics/com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:456)
+	at javafx.graphics/com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:96)
+	at javafx.graphics/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:184)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.IllegalArgumentException: Unable to coerce 20 to class javafx.geometry.Insets.
+	at javafx.fxml/com.sun.javafx.fxml.BeanAdapter.coerce(BeanAdapter.java:497)
+	at javafx.fxml/com.sun.javafx.fxml.BeanAdapter.put(BeanAdapter.java:259)
+	at javafx.fxml/com.sun.javafx.fxml.BeanAdapter.put(BeanAdapter.java:54)
+	at javafx.fxml/javafx.fxml.FXMLLoader$Element.applyProperty(FXMLLoader.java:523)
+	at javafx.fxml/javafx.fxml.FXMLLoader$Element.processValue(FXMLLoader.java:373)
+	at javafx.fxml/javafx.fxml.FXMLLoader$Element.processPropertyAttribute(FXMLLoader.java:335)
+	at javafx.fxml/javafx.fxml.FXMLLoader$Element.processInstancePropertyAttributes(FXMLLoader.java:245)
+	at javafx.fxml/javafx.fxml.FXMLLoader$ValueElement.processEndElement(FXMLLoader.java:778)
+	at javafx.fxml/javafx.fxml.FXMLLoader.processEndElement(FXMLLoader.java:2961)
+	at javafx.fxml/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2646)
+	... 14 more
+? Main scene loaded
+
+Step 5: Showing window...
+? Application window displayed
+
+??????????????????????????????????????????????????????????????
+?          Application Started Successfully!                 ?
+??????????????????????????????????????????????????????????????
+
+Nov 07, 2025 10:20:38 AM com.jetstream.database.DatabaseConnection close
+INFO: DB connections closed.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  14.997 s
+[INFO] Finished at: 2025-11-07T10:20:39+02:00
+[INFO] ------------------------------------------------------------------------

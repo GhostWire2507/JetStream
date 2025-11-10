@@ -1,0 +1,95 @@
+/* Root & Global Styles */
+.root {
+    -fx-font-family: "Segoe UI", "Roboto", sans-serif;
+    -fx-background-color: #F5F7FA;
+    -fx-text-fill: #2E2E2E;
+}
+
+/* Titles */
+.title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-fill: #003366;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 2, 0.5, 0, 1);
+}
+
+/* Buttons */
+.button, .button:default {
+    -fx-background-color: linear-gradient(to bottom, #3DA9FC, #023E8A);
+    -fx-text-fill: white;
+    -fx-background-radius: 10px;
+    -fx-padding: 10 20 10 20;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 4, 0, 0, 2);
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+.button:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-background-color: linear-gradient(to bottom, #1E90FF, #023E8A);
+}
+
+/* TextFields & PasswordFields */
+.text-field, .password-field {
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-padding: 8;
+    -fx-border-color: #B0C4DE;
+    -fx-border-width: 1px;
+    -fx-focus-color: #3DA9FC;
+    -fx-faint-focus-color: transparent;
+}
+
+/* Cards */
+.card {
+    -fx-background-color: white;
+    -fx-padding: 15;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0.3, 0, 2);
+    -fx-alignment: CENTER;
+    -fx-pref-width: 150px;
+}
+
+.card-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-fill: #023E8A;
+}
+
+.card-value {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-fill: #3DA9FC;
+}
+
+/* TableViews */
+.table-view {
+    -fx-background-color: white;
+    -fx-table-cell-border-color: #E0E0E0;
+    -fx-table-header-border-color: #B0C4DE;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 5;
+}
+
+.table-column {
+    -fx-font-weight: bold;
+    -fx-background-color: #F0F8FF;
+}
+
+/* Main Menu */
+.vbox > .button {
+    -fx-min-width: 200px;
+}
+
+/* Hover effect for TableView rows */
+.table-row-cell:hover {
+    -fx-background-color: rgba(61, 169, 252, 0.15);
+}
+
+/* Fade-in transition (for cards or other elements) */
+.fade-in {
+    -fx-opacity: 0;
+}
