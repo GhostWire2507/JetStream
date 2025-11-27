@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.jetstream.controllers.FlightController"
+      alignment="TOP_CENTER"
+      spacing="20"
+      prefWidth="800"
+      prefHeight="600">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Flight Dashboard Cards -->
+    <HBox spacing="20" alignment="CENTER">
+        <VBox styleClass="card">
+            <Text text="Total Flights" styleClass="card-title"/>
+            <Text fx:id="txtTotalFlights" text="0" styleClass="card-value"/>
+        </VBox>
+        <VBox styleClass="card">
+            <Text text="Available Seats" styleClass="card-title"/>
+            <Text fx:id="txtAvailableSeats" text="0" styleClass="card-value"/>
+        </VBox>
+    </HBox>
+
+    <!-- Flight Input Form -->
+    <VBox spacing="10" alignment="CENTER">
+        <Text text="Add / Update Flight" styleClass="title"/>
+        <TextField fx:id="txtFlightNumber" promptText="Flight Number"/>
+        <TextField fx:id="txtOrigin" promptText="Origin"/>
+        <TextField fx:id="txtDestination" promptText="Destination"/>
+        <TextField fx:id="txtCapacity" promptText="Capacity"/>
+        <HBox spacing="10" alignment="CENTER">
+            <Button fx:id="btnAddFlight" text="Add Flight" onAction="#onAddFlight"/>
+            <Button fx:id="btnBack" text="Back" onAction="#onBack"/>
+        </HBox>
+    </VBox>
+
+    <!-- Table of Flights -->
+    <TableView fx:id="tblFlights" prefHeight="300" prefWidth="600" styleClass="table-view">
+        <columns>
+            <TableColumn fx:id="colFlightNumber" text="Flight Number"/>
+            <TableColumn fx:id="colOrigin" text="Origin"/>
+            <TableColumn fx:id="colDestination" text="Destination"/>
+            <TableColumn fx:id="colCapacity" text="Capacity"/>
+        </columns>
+    </TableView>
+
+</VBox>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.6"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.jetstream.controllers.MyCancellationsController"
+            prefHeight="700.0" prefWidth="1200.0">
+
+    <!-- Top Bar -->
+    <top>
+        <HBox style="-fx-background-color: #1e3c72; -fx-padding: 15 15 15 15;" spacing="20" alignment="CENTER_LEFT">
+            <Label text="✈ JetStream Airlines - Cancel Booking" style="-fx-text-fill: white; -fx-font-size: 20; -fx-font-weight: bold;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="welcomeLabel" text="Welcome, Customer" style="-fx-text-fill: white; -fx-font-size: 14;"/>
+            <Button text="Back to Dashboard" onAction="#handleBack"
+                    style="-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-font-size: 12; -fx-padding: 8 15 8 15; -fx-background-radius: 5;"/>
+        </HBox>
+    </top>
+
+    <!-- Left Sidebar -->
+    <left>
+        <VBox style="-fx-background-color: #f5f5f5; -fx-padding: 20 20 20 20;" spacing="15" prefWidth="220">
+            <Label text="CANCELLATION OPTIONS" style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #666;"/>
+            <Separator/>
+
+            <!-- Cancellation Info -->
+            <Label text="Cancellation Policy" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+            <Label text="• 80% refund for cancellations" style="-fx-font-size: 11; -fx-text-fill: #666;"/>
+            <Label text="• 20% processing fee applies" style="-fx-font-size: 11; -fx-text-fill: #666;"/>
+            <Label text="• Refund processed in 5-7 days" style="-fx-font-size: 11; -fx-text-fill: #666;"/>
+            <Separator/>
+
+            <!-- Actions -->
+            <Label text="Selected Booking Actions" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+            <Button fx:id="btnCancelSelected" text="Cancel Selected Booking" onAction="#handleCancelSelected" prefWidth="180"
+                    style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-padding: 10 8 10 8;"/>
+            <Button fx:id="btnViewDetails" text="View Cancellation Details" onAction="#handleViewDetails" prefWidth="180"
+                    style="-fx-background-color: #2196f3; -fx-text-fill: white; -fx-padding: 8 8 8 8;"/>
+        </VBox>
+    </left>
+
+    <!-- Center Content -->
+    <center>
+        <VBox spacing="20" style="-fx-padding: 30 30 30 30;">
+
+            <!-- Statistics Cards -->
+            <GridPane hgap="20" vgap="20">
+                <!-- Cancellable Bookings -->
+                <VBox style="-fx-background-color: white; -fx-padding: 20 20 20 20; -fx-background-radius: 10;" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <effect><DropShadow color="#00000033" radius="10"/></effect>
+                    <Label text="Cancellable Bookings" style="-fx-font-size: 14; -fx-text-fill: #666;"/>
+                    <Label fx:id="totalCancellableLabel" text="0" style="-fx-font-size: 36; -fx-font-weight: bold; -fx-text-fill: #f44336;"/>
+                    <Label text="Available for cancellation" style="-fx-font-size: 11; -fx-text-fill: #999;"/>
+                </VBox>
+
+                <!-- Refundable Amount -->
+                <VBox style="-fx-background-color: white; -fx-padding: 20 20 20 20; -fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <effect><DropShadow color="#00000033" radius="10"/></effect>
+                    <Label text="Total Refundable" style="-fx-font-size: 14; -fx-text-fill: #666;"/>
+                    <Label fx:id="refundableAmountLabel" text="R 0.00" style="-fx-font-size: 36; -fx-font-weight: bold; -fx-text-fill: #4caf50;"/>
+                    <Label text="80% of booking amount" style="-fx-font-size: 11; -fx-text-fill: #999;"/>
+                </VBox>
+
+                <!-- Cancellation Fees -->
+                <VBox style="-fx-background-color: white; -fx-padding: 20 20 20 20; -fx-background-radius: 10;" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                    <effect><DropShadow color="#00000033" radius="10"/></effect>
+                    <Label text="Cancellation Fees" style="-fx-font-size: 14; -fx-text-fill: #666;"/>
+                    <Label fx:id="cancellationFeeLabel" text="R 0.00" style="-fx-font-size: 36; -fx-font-weight: bold; -fx-text-fill: #ff9800;"/>
+                    <Label text="20% processing fee" style="-fx-font-size: 11; -fx-text-fill: #999;"/>
+                </VBox>
+            </GridPane>
+
+            <!-- Cancellable Bookings Table -->
+            <VBox spacing="10" style="-fx-background-color: white; -fx-padding: 20 20 20 20; -fx-background-radius: 10;">
+                <effect><DropShadow color="#00000033" radius="10"/></effect>
+                <Label text="Bookings Available for Cancellation" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                <Label text="Select a booking below to cancel it. Only confirmed bookings can be cancelled." style="-fx-font-size: 12; -fx-text-fill: #666;"/>
+                <TableView fx:id="bookingsTable" prefHeight="400">
+                    <columns>
+                        <TableColumn fx:id="colPNR" text="PNR" prefWidth="120"/>
+                        <TableColumn fx:id="colFlightNumber" text="Flight" prefWidth="120"/>
+                        <TableColumn fx:id="colSeatNumber" text="Seat" prefWidth="80"/>
+                        <TableColumn fx:id="colBookingDate" text="Booking Date" prefWidth="120"/>
+                        <TableColumn fx:id="colDepartureDate" text="Departure" prefWidth="120"/>
+                        <TableColumn fx:id="colAmount" text="Original Amount" prefWidth="120"/>
+                        <TableColumn fx:id="colRefundAmount" text="Refund Amount" prefWidth="120"/>
+                    </columns>
+                </TableView>
+            </VBox>
+
+            <!-- Important Notice -->
+            <VBox spacing="10" style="-fx-background-color: #fff3cd; -fx-padding: 15 15 15 15; -fx-background-radius: 10; -fx-border-color: #ffeaa7; -fx-border-width: 1; -fx-border-radius: 10;">
+                <Label text="⚠ Important Notice" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #856404;"/>
+                <Label text="• Cancellation requests are processed within 24 hours" style="-fx-font-size: 12; -fx-text-fill: #856404;"/>
+                <Label text="• Refunds are credited to your original payment method" style="-fx-font-size: 12; -fx-text-fill: #856404;"/>
+                <Label text="• Cancelled bookings cannot be restored" style="-fx-font-size: 12; -fx-text-fill: #856404;"/>
+            </VBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>

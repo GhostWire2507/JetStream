@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.jetstream.controllers.AdminController"
+      alignment="TOP_CENTER"
+      spacing="20"
+      prefWidth="800"
+      prefHeight="600">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Admin Dashboard Cards (appear after login) -->
+    <HBox fx:id="cardContainer" spacing="20" alignment="CENTER" visible="false">
+        <VBox styleClass="card">
+            <Text text="Total Flights" styleClass="card-title"/>
+            <Text fx:id="txtTotalFlights" text="0" styleClass="card-value"/>
+        </VBox>
+        <VBox styleClass="card">
+            <Text text="Total Bookings" styleClass="card-title"/>
+            <Text fx:id="txtTotalBookings" text="0" styleClass="card-value"/>
+        </VBox>
+        <VBox styleClass="card">
+            <Text text="Cancellations" styleClass="card-title"/>
+            <Text fx:id="txtTotalCancellations" text="0" styleClass="card-value"/>
+        </VBox>
+    </HBox>
+
+    <!-- Login Form -->
+    <VBox spacing="10" alignment="CENTER" fx:id="loginForm">
+        <Text text="Admin Login" styleClass="title"/>
+        <TextField fx:id="txtUsername" promptText="Username"/>
+        <PasswordField fx:id="txtPassword" promptText="Password"/>
+        <Button fx:id="btnLogin" text="Login" onAction="#onLogin"/>
+        <Button fx:id="btnBack" text="Back" onAction="#onBack"/>
+    </VBox>
+
+</VBox>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.6"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.jetstream.controllers.ReportsController"
+            prefHeight="700.0" prefWidth="1200.0">
+
+    <!-- Top Bar -->
+    <top>
+        <HBox style="-fx-background-color: #1e3c72; -fx-padding: 15;" spacing="20" alignment="CENTER_LEFT">
+            <Label text="📊 JetStream Airlines - Reports" style="-fx-text-fill: white; -fx-font-size: 20; -fx-font-weight: bold;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Back to Dashboard" onAction="#handleBackToDashboard"
+                    style="-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-font-size: 12; -fx-padding: 8 15; -fx-background-radius: 5;"/>
+        </HBox>
+    </top>
+
+    <!-- Center Content -->
+    <center>
+        <VBox spacing="30" style="-fx-padding: 30;">
+            <!-- Statistics Cards -->
+            <GridPane hgap="20" vgap="20">
+
+                <!-- Total Flights -->
+                <VBox style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10;">
+                    <effect>
+                        <DropShadow color="#33000000" radius="10"/>
+                    </effect>
+                    <Label text="Total Flights" style="-fx-font-size: 14; -fx-text-fill: #666;"/>
+                    <Label fx:id="totalFlightsLabel" text="0" style="-fx-font-size: 36; -fx-font-weight: bold; -fx-text-fill: #1e3c72;"/>
+                    <Label text="Flights in system" style="-fx-font-size: 11; -fx-text-fill: #999;"/>
+                    <GridPane.columnIndex>0</GridPane.columnIndex>
+                    <GridPane.rowIndex>0</GridPane.rowIndex>
+                </VBox>
+
+                <!-- Total Bookings -->
+                <VBox style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10;">
+                    <effect>
+                        <DropShadow color="#33000000" radius="10"/>
+                    </effect>
+                    <Label text="Total Bookings" style="-fx-font-size: 14; -fx-text-fill: #666;"/>
+                    <Label fx:id="totalBookingsLabel" text="0" style="-fx-font-size: 36; -fx-font-weight: bold; -fx-text-fill: #4caf50;"/>
+                    <Label text="Bookings made" style="-fx-font-size: 11; -fx-text-fill: #999;"/>
+                    <GridPane.columnIndex>1</GridPane.columnIndex>
+                    <GridPane.rowIndex>0</GridPane.rowIndex>
+                </VBox>
+
+                <!-- Total Cancellations -->
+                <VBox style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10;">
+                    <effect>
+                        <DropShadow color="#33000000" radius="10"/>
+                    </effect>
+                    <Label text="Total Cancellations" style="-fx-font-size: 14; -fx-text-fill: #666;"/>
+                    <Label fx:id="totalCancellationsLabel" text="0" style="-fx-font-size: 36; -fx-font-weight: bold; -fx-text-fill: #ff9800;"/>
+                    <Label text="Cancellations processed" style="-fx-font-size: 11; -fx-text-fill: #999;"/>
+                    <GridPane.columnIndex>2</GridPane.columnIndex>
+                    <GridPane.rowIndex>0</GridPane.rowIndex>
+                </VBox>
+
+                <!-- Total Revenue -->
+                <VBox style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10;">
+                    <effect>
+                        <DropShadow color="#33000000" radius="10"/>
+                    </effect>
+                    <Label text="Total Revenue" style="-fx-font-size: 14; -fx-text-fill: #666;"/>
+                    <Label fx:id="totalRevenueLabel" text="M" style="-fx-font-size: 36; -fx-font-weight: bold; -fx-text-fill: #388e3c;"/>
+                    <Label text="Revenue from bookings" style="-fx-font-size: 11; -fx-text-fill: #999;"/>
+                    <GridPane.columnIndex>3</GridPane.columnIndex>
+                    <GridPane.rowIndex>0</GridPane.rowIndex>
+                </VBox>
+
+            </GridPane>
+
+            <!-- Recent Bookings Table -->
+            <VBox spacing="10" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10;">
+                <effect>
+                    <DropShadow color="#33000000" radius="10"/>
+                </effect>
+                <Label text="Recent Bookings" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                <TableView fx:id="recentBookingsTable" prefHeight="350">
+                    <columns>
+                        <TableColumn fx:id="colBookingId" text="Booking ID" prefWidth="100"/>
+                        <TableColumn fx:id="colUser" text="User" prefWidth="120"/>
+                        <TableColumn fx:id="colFlight" text="Flight" prefWidth="120"/>
+                        <TableColumn fx:id="colDate" text="Date" prefWidth="120"/>
+                        <TableColumn fx:id="colAmount" text="Amount" prefWidth="100"/>
+                        <TableColumn fx:id="colStatus" text="Status" prefWidth="100"/>
+                    </columns>
+                </TableView>
+            </VBox>
+
+        </VBox>
+    </center>
+</BorderPane>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.jetstream.controllers.MainController"
+      alignment="TOP_CENTER"
+      spacing="20"
+      prefWidth="800"
+      prefHeight="600"
+      style="-fx-background-color: #F5F7FA;">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Title -->
+    <Text text="JetStream Airline Management" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-fill: #003366;"/>
+
+    <!-- Dashboard Cards -->
+    <HBox spacing="20" alignment="CENTER" style="-fx-padding: 20 20 20 20;">
+        <VBox fx:id="cardFlights" alignment="CENTER" spacing="10"
+              style="-fx-background-color: white; -fx-padding: 20 20 20 20; -fx-background-radius: 12;"
+              prefWidth="150" prefHeight="120">
+            <Text text="Flights" style="-fx-font-size: 14px; -fx-fill: #666666;"/>
+            <Text fx:id="txtTotalFlights" text="0" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-fill: #1E90FF;"/>
+        </VBox>
+        <VBox fx:id="cardBookings" alignment="CENTER" spacing="10"
+              style="-fx-background-color: white; -fx-padding: 20 20 20 20; -fx-background-radius: 12;"
+              prefWidth="150" prefHeight="120">
+            <Text text="Bookings" style="-fx-font-size: 14px; -fx-fill: #666666;"/>
+            <Text fx:id="txtTotalBookings" text="0" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-fill: #4CAF50;"/>
+        </VBox>
+        <VBox fx:id="cardCancellations" alignment="CENTER" spacing="10"
+              style="-fx-background-color: white; -fx-padding: 20 20 20 20; -fx-background-radius: 12;"
+              prefWidth="150" prefHeight="120">
+            <Text text="Cancellations" style="-fx-font-size: 14px; -fx-fill: #666666;"/>
+            <Text fx:id="txtTotalCancellations" text="0" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-fill: #E74C3C;"/>
+        </VBox>
+        <VBox fx:id="cardPassengers" alignment="CENTER" spacing="10"
+              style="-fx-background-color: white; -fx-padding: 20 20 20 20; -fx-background-radius: 12;"
+              prefWidth="150" prefHeight="120">
+            <Text text="Passengers" style="-fx-font-size: 14px; -fx-fill: #666666;"/>
+            <Text fx:id="txtTotalPassengers" text="0" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-fill: #003366;"/>
+        </VBox>
+    </HBox>
+
+    <!-- Navigation Buttons -->
+    <VBox spacing="12" alignment="CENTER" style="-fx-padding: 20 20 20 20;">
+        <Button fx:id="btnReservation" text="Reservation" onAction="#onReservation"
+                prefWidth="250" prefHeight="40"
+                style="-fx-background-color: #1E90FF; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+        <Button fx:id="btnFlight" text="Flight Management" onAction="#onFlight"
+                prefWidth="250" prefHeight="40"
+                style="-fx-background-color: #1E90FF; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+        <Button fx:id="btnCancellation" text="Cancellation" onAction="#onCancellation"
+                prefWidth="250" prefHeight="40"
+                style="-fx-background-color: #1E90FF; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+        <Button fx:id="btnAdmin" text="Admin Dashboard" onAction="#onAdmin"
+                prefWidth="250" prefHeight="40"
+                style="-fx-background-color: #003366; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+    </VBox>
+
+</VBox>
