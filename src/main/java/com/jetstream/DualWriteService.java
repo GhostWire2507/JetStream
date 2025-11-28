@@ -1,167 +1,181 @@
-package com.jetstream.database;
+package com.jetstream.services;
+
+import com.jetstream.database.DatabaseConnection;
+import com.jetstream.database.PostgreSQLConfig;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Logger;
 
 /**
- * Dual Write Service - Coordinates writes to both SQLite (primary) and PostgreSQL (secondary).
- * 
- * Design principles:
- * - SQLite is always the source of truth
- * - PostgreSQL writes are best-effort and non-blocking
- * - If PostgreSQL fails, log error but continue with SQLite success
- * - Supports async mode to avoid blocking UI
+ * Service for dual-write operations to both SQLite (primary) and PostgreSQL (secondary)
+ * Ensures data consistency across both databases
  */
 public class DualWriteService {
 
     private static final Logger logger = Logger.getLogger(DualWriteService.class.getName());
 
+    private static DualWriteService instance;
+
+    private DualWriteService() {
+        logger.info("Dual-write service initialized. PostgreSQL enabled: " + PostgreSQLConfig.isEnabled());
+    }
+
+    public static DualWriteService getInstance() {
+        if (instance == null) {
+            instance = new DualWriteService();
+        }
+        return instance;
+    }
+
     /**
-     * Execute an update on both databases.
-     * SQLite is primary (must succeed), PostgreSQL is secondary (best-effort).
-     * 
-     * @param sql The SQL statement to execute
-     * @return Number of rows affected in SQLite, or -1 on failure
+     * Execute a write operation on both databases
+     * Primary: SQLite (must succeed)
+     * Secondary: PostgreSQL (failure logged but doesn't fail the operation)
      */
-    public static int executeUpdate(String sql) {
-        // First, write to SQLite (primary)
-        Connection sqliteConn = DatabaseConnection.getConnection();
-        if (sqliteConn == null) {
-            logger.severe("SQLite not available for update");
-            return -1;
+    public boolean executeDualWrite(String sqliteQuery, String postgresQuery, Object... params) {
+        return executeDualWrite(sqliteQuery, postgresQuery, false, params);
+    }
+
+    /**
+     * Execute a write operation on both databases with async option
+     */
+    public boolean executeDualWrite(String sqliteQuery, String postgresQuery, boolean asyncPostgres, Object... params) {
+        // Always execute on SQLite first (primary database)
+        boolean sqliteSuccess = executeOnSQLite(sqliteQuery, params);
+
+        if (!sqliteSuccess) {
+            logger.severe("Primary SQLite operation failed. Aborting dual-write.");
+            return false;
         }
 
-        int sqliteResult;
+        // Execute on PostgreSQL if enabled
+        if (PostgreSQLConfig.isEnabled() && postgresQuery != null) {
+            if (asyncPostgres) {
+                // Execute asynchronously to avoid blocking UI
+                CompletableFuture.runAsync(() -> executeOnPostgreSQL(postgresQuery, params));
+            } else {
+                // Execute synchronously
+                executeOnPostgreSQL(postgresQuery, params);
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Execute query on SQLite (primary database)
+     */
+    private boolean executeOnSQLite(String query, Object... params) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
         try {
-            Statement stmt = sqliteConn.createStatement();
-            sqliteResult = stmt.executeUpdate(sql);
-            logger.fine("SQLite update successful: " + sqliteResult + " rows");
-        } catch (SQLException e) {
-            logger.severe("SQLite update failed: " + e.getMessage());
-            return -1;
-        }
+            conn = DatabaseConnection.getConnection();
+            if (conn == null) {
+                logger.severe("Failed to get SQLite connection");
+                return false;
+            }
 
-        // Then, write to PostgreSQL (secondary, non-blocking if async enabled)
-        if (PostgreSQLConfig.isEnabled()) {
-            writeToPostgreSQL(sql);
-        }
-
-        return sqliteResult;
-    }
-
-    /**
-     * Execute a prepared statement update on both databases.
-     * 
-     * @param sql The SQL statement with placeholders
-     * @param params The parameters to bind
-     * @return Number of rows affected in SQLite, or -1 on failure
-     */
-    public static int executeUpdatePrepared(String sql, Object... params) {
-        // First, write to SQLite (primary)
-        Connection sqliteConn = DatabaseConnection.getConnection();
-        if (sqliteConn == null) {
-            logger.severe("SQLite not available for prepared update");
-            return -1;
-        }
-
-        int sqliteResult;
-        try (PreparedStatement stmt = sqliteConn.prepareStatement(sql)) {
+            stmt = conn.prepareStatement(query);
             setParameters(stmt, params);
-            sqliteResult = stmt.executeUpdate();
-            logger.fine("SQLite prepared update successful: " + sqliteResult + " rows");
+
+            boolean isSelect = query.trim().toUpperCase().startsWith("SELECT");
+            if (isSelect) {
+                ResultSet rs = stmt.executeQuery();
+                // For SELECT queries, we just check if execution succeeded
+                rs.close();
+            } else {
+                stmt.executeUpdate();
+            }
+
+            logger.fine("SQLite operation successful: " + query.substring(0, Math.min(50, query.length())));
+            return true;
+
         } catch (SQLException e) {
-            logger.severe("SQLite prepared update failed: " + e.getMessage());
-            return -1;
+            logger.severe("SQLite operation failed: " + e.getMessage());
+            logger.severe("Query: " + query);
+            return false;
+        } finally {
+            closeResources(conn, stmt, null);
         }
-
-        // Then, write to PostgreSQL (secondary)
-        if (PostgreSQLConfig.isEnabled()) {
-            writeToPostgreSQLPrepared(sql, params);
-        }
-
-        return sqliteResult;
     }
 
     /**
-     * Execute a query on SQLite (reads always go to primary)
+     * Execute query on PostgreSQL (secondary database)
      */
-    public static ResultSet executeQuery(String sql) {
-        return DatabaseConnection.executeQuery(sql);
-    }
+    private void executeOnPostgreSQL(String query, Object... params) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
 
-    /**
-     * Execute a prepared query on SQLite
-     */
-    public static ResultSet executeQueryPrepared(Connection conn, String sql, Object... params) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        setParameters(stmt, params);
-        return stmt.executeQuery();
-    }
-
-    /**
-     * Write to PostgreSQL - async or sync based on config
-     */
-    private static void writeToPostgreSQL(String sql) {
-        if (PostgreSQLConfig.isAsyncWritesEnabled()) {
-            PostgreSQLService.executeUpdateAsync(sql)
-                .thenAccept(result -> {
-                    if (result < 0) {
-                        logger.warning("PostgreSQL async write failed for: " + truncateSql(sql));
-                    }
-                });
-        } else {
-            int result = PostgreSQLService.executeUpdate(sql);
-            if (result < 0) {
-                logger.warning("PostgreSQL sync write failed for: " + truncateSql(sql));
+        try {
+            conn = PostgreSQLConfig.getConnection();
+            if (conn == null) {
+                logger.warning("Failed to get PostgreSQL connection for dual-write");
+                return;
             }
-        }
-    }
 
-    /**
-     * Write to PostgreSQL with prepared statement - async or sync based on config
-     */
-    private static void writeToPostgreSQLPrepared(String sql, Object... params) {
-        if (PostgreSQLConfig.isAsyncWritesEnabled()) {
-            PostgreSQLService.executeUpdatePreparedAsync(sql, params)
-                .thenAccept(result -> {
-                    if (result < 0) {
-                        logger.warning("PostgreSQL async prepared write failed for: " + truncateSql(sql));
-                    }
-                });
-        } else {
-            int result = PostgreSQLService.executeUpdatePrepared(sql, params);
-            if (result < 0) {
-                logger.warning("PostgreSQL sync prepared write failed for: " + truncateSql(sql));
+            stmt = conn.prepareStatement(query);
+            setParameters(stmt, params);
+
+            boolean isSelect = query.trim().toUpperCase().startsWith("SELECT");
+            if (isSelect) {
+                ResultSet rs = stmt.executeQuery();
+                rs.close();
+            } else {
+                stmt.executeUpdate();
             }
+
+            logger.fine("PostgreSQL operation successful: " + query.substring(0, Math.min(50, query.length())));
+
+        } catch (SQLException e) {
+            logger.warning("PostgreSQL operation failed (continuing with SQLite only): " + e.getMessage());
+            logger.warning("Query: " + query);
+            // Don't throw exception - PostgreSQL failure shouldn't break the flow
+        } finally {
+            closeResources(conn, stmt, null);
         }
     }
 
     /**
-     * Helper to set prepared statement parameters
+     * Set parameters for prepared statement
      */
-    private static void setParameters(PreparedStatement stmt, Object... params) throws SQLException {
+    private void setParameters(PreparedStatement stmt, Object... params) throws SQLException {
         for (int i = 0; i < params.length; i++) {
             stmt.setObject(i + 1, params[i]);
         }
     }
 
     /**
-     * Truncate SQL for logging (avoid logging full statements)
+     * Close database resources
      */
-    private static String truncateSql(String sql) {
-        return sql.length() > 100 ? sql.substring(0, 100) + "..." : sql;
+    private void closeResources(Connection conn, PreparedStatement stmt, ResultSet rs) {
+        if (rs != null) {
+            try { rs.close(); } catch (SQLException e) { logger.warning("Failed to close ResultSet: " + e.getMessage()); }
+        }
+        if (stmt != null) {
+            try { stmt.close(); } catch (SQLException e) { logger.warning("Failed to close PreparedStatement: " + e.getMessage()); }
+        }
+        if (conn != null) {
+            try { conn.close(); } catch (SQLException e) { logger.warning("Failed to close Connection: " + e.getMessage()); }
+        }
     }
 
     /**
-     * Check if dual-write mode is active
+     * Check if PostgreSQL dual-write is enabled
      */
-    public static boolean isDualWriteActive() {
+    public boolean isPostgresEnabled() {
         return PostgreSQLConfig.isEnabled();
     }
-}
 
+    /**
+     * Enable/disable PostgreSQL dual-write
+     */
+    public void setPostgresEnabled(boolean enabled) {
+        PostgreSQLConfig.setEnabled(enabled);
+        logger.info("PostgreSQL dual-write " + (enabled ? "enabled" : "disabled"));
+    }
+}
