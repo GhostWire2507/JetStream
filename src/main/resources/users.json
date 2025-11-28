@@ -1,0 +1,26 @@
+[
+  {
+    "username": "admin",
+    "password": "admin123",
+    "role": "admin",
+    "fullName": "System Administrator",
+    "email": "admin@jetstream.com",
+    "phone": "58000000"
+  },
+  {
+    "username": "staff",
+    "password": "staff123",
+    "role": "staff",
+    "fullName": "Nthabiseng Khoarai",
+    "email": "nthabi@jetstream.com",
+    "phone": "58550123"
+  },
+  {
+    "username": "customer",
+    "password": "customer123",
+    "role": "customer",
+    "fullName": "Thabo Mokhoro",
+    "email": "thabo@example.com",
+    "phone": "58941234"
+  }
+]
